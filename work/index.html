@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <!-- Load TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <!-- Load Posenet -->
+    <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
+  </head>
+
+  <body>
+    <img id='test' src='IMG_4451.JPG' style='position:absolute;' />
+  </body>
+  <script>
+    var imageScaleFactor = 0.2;
+    var outputStride = 16;
+    var flipHorizontal = false;
+
+    var imageElement = document.getElementById('test');
+
+    posenet.load().then(function(net){
+        return net.estimateSinglePose(imageElement, imageScaleFactor, flipHorizontal, outputStride)
+    }).then(function(pose){
+        console.log(pose);
+    });
+  </script>
+</html>
